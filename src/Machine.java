@@ -14,11 +14,16 @@ public class Machine {
 	// Note2: There are other variables you will need, some final, some not.
 	private final String[] iconNames = {"Cherry","Orange"," Bell ","Globe "," Plum ","Lemon "," Bar  "}; // feel free to change this!
 	private final int[] firstWheelDistribution = {0,0,0,0,0,1,1,1,1,2,2,2,3,4,4,4,5,5,5,6};
+	private final int[] secondWheelDistribution = {0,0,1,1,1,1,2,2,2,2,3,4,4,4,5,5,5,5,5,6};
+	private final int[] thirdWheelDistribution = {0,0,0,1,1,1,1,2,2,2,2,3,4,5,5,5,5,5,5,6};
 
 	/**
 	 * constructor - set up the Machine's variables.
 	 */
 	// TODO: you write the Machine's constructor.
+	public Machine() {
+		
+	}
 
 	/**
 	 * toString - display what is showing on the wheels.
