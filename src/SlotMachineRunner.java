@@ -17,7 +17,6 @@ public class SlotMachineRunner {
 			System.out.println("End game");
 		}
 		
-		// commit is different from comment
 	}
 
 }
