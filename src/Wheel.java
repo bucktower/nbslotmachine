@@ -14,7 +14,7 @@ public class Wheel {
 	public void spinWheel()
 	{
 		// randomNum = random number
-			int randomNum = (int) (Math.random()*12);
+			int randomNum = (int) (Math.random()*20);
 			if (wheelIdentity == 1)
 			{
 				wheelSelection = firstWheelDistribution[randomNum];
