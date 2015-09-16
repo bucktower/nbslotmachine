@@ -6,7 +6,7 @@
  */
 public class Machine {
 	// TODO: decide which private member variables the Machine class needs and declare them here.
-	private Wheel[] wheelCollection = new Wheel[3];
+	private Wheel[] wheelCollection;
 	
 	// Note: I'm going to suggest a couple of "final" (i.e. constant)  
 	//       arrays that you may find handy. The "final" keyword means
@@ -21,7 +21,7 @@ public class Machine {
 	 */
 	// TODO: you write the Machine's constructor.
 	public Machine() {
-		
+		wheelCollection = new Wheel[3];
 	}
 
 	/**
@@ -89,6 +89,27 @@ public class Machine {
 		} else if(iconQuantity[7] == 3) {
 			// 3 bars -- 100
 			return 100;
+		} else if(iconQuantity[4] == 3) {
+			// 3 plums -- 50
+			return 50;
+		} else if(iconQuantity[2] == 3) {
+			// 3 bells -- 20
+			return 20;
+		} else if(iconQuantity[1] == 3) {
+			// 3 bells -- 15
+			return 15;
+		} else if(iconQuantity[0] >= 1) {
+			// cherries (any #)
+			switch(iconQuantity[0]) {
+				case 3:
+					return 10;
+				case 2:
+					return 5;
+				case 1:
+					return 2;
+				default:
+					return 0;
+			}
 		} else {
 			return 0;
 		}

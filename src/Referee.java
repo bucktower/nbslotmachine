@@ -17,6 +17,7 @@ public class Referee {
 	public void playGame()
 	{
 		// TODO: write the Referee's playGame method.
-		System.out.println("Playing game."); // placeholder code.
+		System.out.println("Setting Up Game...");
+		
 	}
 }
