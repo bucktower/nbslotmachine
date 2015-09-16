@@ -6,23 +6,22 @@
  */
 public class Machine {
 	// TODO: decide which private member variables the Machine class needs and declare them here.
+	private Wheel[] wheelCollection;
 	
 	// Note: I'm going to suggest a couple of "final" (i.e. constant)  
 	//       arrays that you may find handy. The "final" keyword means
 	//       that the value of these arrays won't change while the program
 	//       is running.
 	// Note2: There are other variables you will need, some final, some not.
-	private final String[] iconNames = {"Cherry","Orange"," Bell ","Globe "," Plum ","Lemon "," Bar  "}; // feel free to change this!
-	private final int[] firstWheelDistribution = {0,0,0,0,0,1,1,1,1,2,2,2,3,4,4,4,5,5,5,6};
-	private final int[] secondWheelDistribution = {0,0,1,1,1,1,2,2,2,2,3,4,4,4,5,5,5,5,5,6};
-	private final int[] thirdWheelDistribution = {0,0,0,1,1,1,1,2,2,2,2,3,4,5,5,5,5,5,5,6};
-
+	private final String[] iconNames = {"Cherry", "Orange"," Bell ","Globe "," Plum ","Lemon "," Bar  "}; // feel free to change this!
+	private int[] iconQuantity = {0,0,0,0,0,0,0};
+	
 	/**
 	 * constructor - set up the Machine's variables.
 	 */
 	// TODO: you write the Machine's constructor.
 	public Machine() {
-		
+		wheelCollection = new Wheel[3];
 	}
 
 	/**
@@ -34,12 +33,31 @@ public class Machine {
 	 * +------+------+------+
 	 */
 	// TODO: you write the Machine's toString method.
+	public String toString() {
+		String masterString = "+------+------+------+\n";
+		
+		for(Wheel newWheel: wheelCollection) {
+			masterString += "|" + newWheel.toString();
+			for(int i = 6 - newWheel.toString().length(); i > 0; i--) {
+				masterString += " ";
+			}
+			masterString += "|";
+		}
+		masterString += "\n+------+------+------+";
+		
+		return masterString;
+	}
 	
 	/**
 	 * spin - randomize the values shown on the wheels.
 	 * Note: does not return anything, just changes member variables.
 	 */
 	// TODO: you write the Machine's spin method
+	public void spin() {
+		for(Wheel newWheel: wheelCollection) {
+			newWheel.spinWheel();
+		}
+	}
 	
 	/**
 	 * countIcons - counts how many cherries, how many lemons, etc. are showing.
@@ -51,11 +69,49 @@ public class Machine {
 	// icon are currently displayed.
 	// if you like, you can make this method "private" since it shouldn't
 	// be called by anything but this class.
+	public void countIcons() {
+		for(Wheel newWheel: wheelCollection) {
+			iconQuantity[newWheel.getSelection()]++;
+		}
+	}
 	
 	/**
 	 * calculatePayout - determines how many coins per deposited coin the
 	 * player should receive.
+	 * @return 
 	 * @return payout, a number.
 	 */
 	// TODO: you write the Machine's payout method.
+	public int calculatePayout() {
+		if(iconQuantity[3] == 3){
+			// 3 globes -- 500
+			return 500;
+		} else if(iconQuantity[7] == 3) {
+			// 3 bars -- 100
+			return 100;
+		} else if(iconQuantity[4] == 3) {
+			// 3 plums -- 50
+			return 50;
+		} else if(iconQuantity[2] == 3) {
+			// 3 bells -- 20
+			return 20;
+		} else if(iconQuantity[1] == 3) {
+			// 3 bells -- 15
+			return 15;
+		} else if(iconQuantity[0] >= 1) {
+			// cherries (any #)
+			switch(iconQuantity[0]) {
+				case 3:
+					return 10;
+				case 2:
+					return 5;
+				case 1:
+					return 2;
+				default:
+					return 0;
+			}
+		} else {
+			return 0;
+		}
+	}
 }
