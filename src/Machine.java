@@ -5,7 +5,6 @@
  * Payouts and icons for a typical machine can be found here: http://wizardofodds.com/games/slots/appendix/4/
  */
 public class Machine {
-	// TODO: decide which private member variables the Machine class needs and declare them here.
 	private Wheel[] wheelCollection;
 	
 	// Note: I'm going to suggest a couple of "final" (i.e. constant)  
@@ -19,9 +18,13 @@ public class Machine {
 	/**
 	 * constructor - set up the Machine's variables.
 	 */
-	// TODO: you write the Machine's constructor.
 	public Machine() {
 		wheelCollection = new Wheel[3];
+		
+		wheelCollection[0] = new Wheel(1);
+		wheelCollection[1] = new Wheel(2);
+		wheelCollection[2] = new Wheel(3);
+
 	}
 
 	/**
@@ -32,13 +35,12 @@ public class Machine {
 	 * |Cherry| Bar  |Lemon |
 	 * +------+------+------+
 	 */
-	// TODO: you write the Machine's toString method.
 	public String toString() {
-		String masterString = "+------+------+------+\n";
+		String masterString = "+------+------+------+\n|";
 		
 		for(Wheel newWheel: wheelCollection) {
-			masterString += "|" + newWheel.toString();
-			for(int i = 6 - newWheel.toString().length(); i > 0; i--) {
+			masterString += iconNames[newWheel.getSelection()];
+			for(int i = 6 - iconNames[newWheel.getSelection()].length(); i > 0; i--) {
 				masterString += " ";
 			}
 			masterString += "|";
@@ -52,7 +54,6 @@ public class Machine {
 	 * spin - randomize the values shown on the wheels.
 	 * Note: does not return anything, just changes member variables.
 	 */
-	// TODO: you write the Machine's spin method
 	public void spin() {
 		for(Wheel newWheel: wheelCollection) {
 			newWheel.spinWheel();
@@ -63,7 +64,6 @@ public class Machine {
 	 * countIcons - counts how many cherries, how many lemons, etc. are showing.
 	 * Note: does not return anything, just changes member variables
 	 */
-	// TODO: you write the Machine's countIcons method (optional)
 	// I think you will find this helpful, but it is up to you. I suggest
 	// you keep (a) private member variable(s) indicating how many of each
 	// icon are currently displayed.
@@ -81,12 +81,12 @@ public class Machine {
 	 * @return 
 	 * @return payout, a number.
 	 */
-	// TODO: you write the Machine's payout method.
 	public int calculatePayout() {
+		countIcons();
 		if(iconQuantity[3] == 3){
 			// 3 globes -- 500
 			return 500;
-		} else if(iconQuantity[7] == 3) {
+		} else if(iconQuantity[6] == 3) {
 			// 3 bars -- 100
 			return 100;
 		} else if(iconQuantity[4] == 3) {

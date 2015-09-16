@@ -2,11 +2,14 @@
 public class SlotMachineRunner {
 
 	public static void main(String[] args) {
-		boolean testingMode = false;
+		boolean testingMode = true;
 		if (testingMode)
 		{
 			System.out.println("Start tests");
-			// enter test code here.
+			Machine testMech = new Machine();
+			testMech.spin();
+			System.out.println(testMech.toString());
+			System.out.println("Your winnings are: " + testMech.calculatePayout());
 			System.out.println("End tests");
 		}
 		else
