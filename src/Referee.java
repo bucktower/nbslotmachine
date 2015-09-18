@@ -37,7 +37,7 @@ public class Referee {
 		while (endSession == false && playerMoney > 0)
 		{
 			System.out.println("\nPlease press ENTER to spin the slot machine for " + payment + " " + paymentName + "!");
-			String spinResponse = keyboardReader.nextLine(); // we will not judge whether it was 'p' -- this is just meant as a way to pause
+			String spinResponse = keyboardReader.nextLine(); // we will not judge whether it was ENTER or not -- this is just meant as a way to pause
 			playerMoney -= payment;
 			testMech.spin();
 			winnings = testMech.calculatePayout();
@@ -54,6 +54,7 @@ public class Referee {
 			System.out.println("You have "+playerMoney+" chips remaining.");
 			System.out.println("Spin again? (y/n)");
 			String userResponse = keyboardReader.nextLine();
+			// toUpperCase so that we can catch y and Y, n and N
 			if(userResponse.toUpperCase().equals("Y"))
 				{
 					testMech.spin();
@@ -68,7 +69,14 @@ public class Referee {
 					System.out.println("Please enter y or n");
 				}
 		}
-		System.out.println("Game Over!");
+		String endString = "Game Over! You ended up with " + playerMoney + " " + paymentName + ".";
+		int moneyChange = playerMoney - 100;
+		if(moneyChange >= 0) {
+			endString += "\nThat's " + moneyChange + " more " + paymentName + " than you started with!";
+		} else {
+			endString += "\nThat's " + moneyChange * -1 + " less " + paymentName + " than you started with!";
+		}
+		System.out.println(endString);
 		
 	}
 }
