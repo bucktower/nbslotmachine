@@ -15,12 +15,14 @@ public class Referee {
 	private int playerMoney;
 	private int winnings;
 	private int payment;
+	private String paymentName = "CHIP(S)";
 	public boolean endSession = false;
+	
 	public Referee()
 	{
 		playerMoney = 100;
 		winnings = 0;
-		payment = 1;
+		payment = 3;
 	}
 	
 	/**
@@ -34,34 +36,37 @@ public class Referee {
 		System.out.println("Setting Up Game...");
 		while (endSession == false && playerMoney > 0)
 		{
-		playerMoney -= payment;
-		testMech.spin();
-		winnings = testMech.calculatePayout();
-		System.out.println(testMech.toString());
-		if(winnings>=0)
-		{
-			System.out.println("You won:"+winnings+" chips");
-		}
-		else
-		{
-			System.out.println("You lost:" +winnings+ " chips");
-		}
-		playerMoney += winnings;
-		System.out.println("You have "+playerMoney+" chips remaining.");
-		System.out.println("Spin again? (y/n)");
-		String userResponse = keyboardReader.nextLine();
-		if(userResponse.equals("y"))
+			System.out.println("\nPlease press ENTER to spin the slot machine for " + payment + " " + paymentName + "!");
+			String spinResponse = keyboardReader.nextLine(); // we will not judge whether it was 'p' -- this is just meant as a way to pause
+			playerMoney -= payment;
+			testMech.spin();
+			winnings = testMech.calculatePayout();
+			System.out.println(testMech.toString());
+			if(winnings>=0)
 			{
-				testMech.spin();
+				System.out.println("You won:"+winnings+" chips");
 			}
-		else if(userResponse.equals("n"))
+			else
 			{
-				endSession = true;
+				System.out.println("You lost:" +winnings+ " chips");
 			}
-		else
-			{
-				System.out.println("Please enter y or n");
-			}
+			playerMoney += winnings;
+			System.out.println("You have "+playerMoney+" chips remaining.");
+			System.out.println("Spin again? (y/n)");
+			String userResponse = keyboardReader.nextLine();
+			if(userResponse.toUpperCase().equals("Y"))
+				{
+					testMech.spin();
+					payment+= 5; // payment increases by 5 every time for some more fun & action!
+				}
+			else if(userResponse.toUpperCase().equals("N"))
+				{
+					endSession = true;
+				}
+			else
+				{
+					System.out.println("Please enter y or n");
+				}
 		}
 		System.out.println("Game Over!");
 		
