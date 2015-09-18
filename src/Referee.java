@@ -71,8 +71,10 @@ public class Referee {
 		}
 		String endString = "Game Over! You ended up with " + playerMoney + " " + paymentName + ".";
 		int moneyChange = playerMoney - 100;
-		if(moneyChange >= 0) {
+		if(moneyChange > 0) {
 			endString += "\nThat's " + moneyChange + " more " + paymentName + " than you started with!";
+		} else if (moneyChange == 0) {
+			endString += "\nYou broke even.";
 		} else {
 			endString += "\nThat's " + moneyChange * -1 + " less " + paymentName + " than you started with!";
 		}
